@@ -155,7 +155,7 @@ const arrowRight = document.getElementById("arrow-right");
 
 let isPlaying = false;
 let isVolumeControl = false;
-let duration = 15;
+let duration = 900;
 
 playPauseButton.addEventListener("click", () => {
     if (isPlaying) {
@@ -266,16 +266,15 @@ function clearTime() {
 
 arrowRight.addEventListener("click", () => {
     // Why can't i remove event listener
-    if (duration == 15) {
+    if (duration == 900) {
         totalTimeDisplay.innerText = "20 minutes";
-        duration = 20;
+        duration = 1200;
         arrowRight.style.cursor = "default";
-    } else if (duration == 10) {
+    } else if (duration == 600) {
         totalTimeDisplay.innerText = "15 minutes";
         arrowLeft.style.cursor = "pointer";
-        duration = 15;
+        duration = 900;
     }
-
     audio.pause();
     setTimeout(() => {
         clearTime();
@@ -284,17 +283,15 @@ arrowRight.addEventListener("click", () => {
 
 arrowLeft.addEventListener("click", () => {
     // Why can't i remove event listener
-    if (duration == 15) {
+    if (duration == 900) {
         totalTimeDisplay.innerText = "10 minutes";
-        duration = 10;
+        duration = 600;
         arrowLeft.style.cursor = "default";
-    } else if (duration == 20) {
+    } else if (duration == 1200) {
         totalTimeDisplay.innerText = "15 minutes";
-        duration = 15;
+        duration = 900;
         arrowRight.style.cursor = "pointer";
     }
-
-
     audio.pause();
     setTimeout(() => {
         clearTime();
@@ -303,7 +300,7 @@ arrowLeft.addEventListener("click", () => {
 
 
 
-var eldenLocation = "Leyndell";
+var eldenLocation = "Roundtable Hold";
 var audioSource = document.getElementById("audio-source");
 var locationTitle = document.getElementById("locationTitle");
 

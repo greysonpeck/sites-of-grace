@@ -195,7 +195,7 @@ volumeControl.addEventListener("input", () => {
 audio.addEventListener("timeupdate", () => {
     const currentTime = audio.currentTime;
     // const duration = audio.duration;
-    const duration = 4;
+    const duration = 15;
 
     const currentMinutes = Math.floor(currentTime / 60);
     const currentSeconds = Math.floor(currentTime % 60);

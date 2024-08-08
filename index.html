@@ -11,6 +11,8 @@
     <div id="grace-discovered" class="absolute -mt-[10px] h-full bg-gray-900 bg-opacity-50 opacity-0 -z-10">
         <img class="relative w-[150%] max-w-[150%] overflow-clip right-1/4 top-[20vh]" src="./img/grace-discovered.png" alt="" class="src">
     </div>
+
+    <!-- Stamina bar -->
     <div class="progress-and-volume">
         <div class="progress max-w-[280px] ml-5 pt-2">
             <div class="progress-dark-bg max-w-[280px]"></div>
@@ -18,23 +20,29 @@
             <div class="progress-bar max-w-[273px]" id="progress-bar"></div>
         </div>
         <div class="volume-stuff absolute right-0 top-[5px]">
-            <img id="volume-toggle" src="./img/volume-on.svg" class="volume ml-auto w-7 mr-3 top-3 relative cursor-pointer" alt="" class="src">
+            <img id="volume-toggle" src="./img/volume-on.svg" class="volume ml-auto w-7 mr-3 top-3 relative" alt="" class="src">
             <input type="range" id="volume-control" class="volume-slider pt-5 hidden" min="0" max="1" step="0.01" value="1">
         </div>
     </div>
 
-    <div class="controls flex">
-        <div class="play-and-time flex  w-fit mt-3 ml-7">
-            <button id="play-pause-button" class="text-white pl-5">Start</button>
-            <div id="current-time" class="text-white opacity-0 w-fit px-6 ml-2">0:00</div>
-        </div>
+    <!-- Start and timer -->
+    <div class="controls flex flex-col">
 
+        <div class="play-and-time flex w-48 mt-3 ml-7">
+            <button id="play-pause-button" class="text-white pl-5 mr-auto">Start</button>
+            <div id="current-time" class="text-white opacity-0 w-24 pl-6 ml-2 hidden">0:00</div>
+            <div id="time-section" class="flex items-center text-white w-fit pl-1 pr-6">
+                <img id="arrow-left" class="mr-2 opacity-50" width="8px" src="./img/arrow-left.png" alt="" class="src">
+                <span id="duration" class="w-[4.5rem] text-center">15 minutes</span>
+                <img id="arrow-right" class="ml-2 opacity-50" width="8px" src="./img/arrow-right.png" alt="" class="src"></div>
+        </div>
     </div>
 
-    <div id="total-time" class="hidden"></div>
+
+
 
     <!-- Location Title -->
-    <div class="audio-player sm:w-[400px] w-[280px]">
+    <div class="audio-player sm:w-[400px] w-[280px] mt-32 mx-auto">
         <div id="location-block">
             <hr>
             <h2 id="location-title" class="text-2xl sm:text-3xl text-center py-2">Leyndell, Royal Capital</h2>
@@ -42,7 +50,7 @@
         </div>
 
         <audio id="audio" controls>
-            <source id="audio-source" src="./audio/leyndell_20.mp3" type="audio/mpeg">
+            <source id="audio-source" src="./audio/majula_30.mp3" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
     </div>

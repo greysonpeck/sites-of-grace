@@ -147,19 +147,22 @@ const playPauseButton = document.getElementById("play-pause-button");
 const volumeControl = document.getElementById("volume-control");
 const progressBar = document.getElementById("progress-bar");
 const currentTimeDisplay = document.getElementById("current-time");
-const totalTimeDisplay = document.getElementById("total-time");
+const totalTimeDisplay = document.getElementById("duration");
 const volumeToggle = document.getElementById("volume-toggle");
 const lostGraceMessage = document.getElementById("grace-discovered");
+const arrowLeft = document.getElementById("arrow-left");
+const arrowRight = document.getElementById("arrow-right");
 
 let isPlaying = false;
 let isVolumeControl = false;
+let duration = 15;
 
 playPauseButton.addEventListener("click", () => {
     if (isPlaying) {
         audio.pause();
         playPauseButton.textContent = "";
         console.log("shoud be pausing");
-        playPauseButton.innerText = "Play";
+        playPauseButton.innerText = "Start";
     } else {
         audio.play();
         playPauseButton.textContent = "";
@@ -170,6 +173,8 @@ playPauseButton.addEventListener("click", () => {
     }
     isPlaying = !isPlaying;
 });
+
+
 
 
 volumeToggle.addEventListener("click", () => {
@@ -193,24 +198,23 @@ volumeControl.addEventListener("input", () => {
 });
 
 audio.addEventListener("timeupdate", () => {
-    const currentTime = audio.currentTime;
-    // const duration = audio.duration;
-    const duration = 15;
+    var currentTime = audio.currentTime;
 
-    const currentMinutes = Math.floor(currentTime / 60);
-    const currentSeconds = Math.floor(currentTime % 60);
-    const totalMinutes = Math.floor(duration / 60);
-    const totalSeconds = Math.floor(duration % 60);
+    var currentMinutes = Math.floor(currentTime / 60);
+    var currentSeconds = Math.floor(currentTime % 60);
+    var totalMinutes = Math.floor(duration / 60);
+    var totalSeconds = Math.floor(duration % 60);
 
     const graceSound = new Audio("lost_grace_sfx-10.mp3");
     function playGrace() {
         graceSound.play();
     }
 
-    currentTimeDisplay.textContent = `${currentMinutes}:${currentSeconds < 10 ? '0' : ''}${currentSeconds}`;
-    totalTimeDisplay.textContent = `${totalMinutes}:${totalSeconds < 10 ? '0' : ''}${totalSeconds}`;
+    currentTimeDisplay.textContent = `${currentMinutes}:${currentSeconds < 10 ? '0' : ''}${currentSeconds} / `;
+    // totalTimeDisplay.textContent = `${totalMinutes}:${totalSeconds < 10 ? '0' : ''}${totalSeconds}`;
+    // totalTimeDisplay.textContent = `${duration}m`;
 
-    const progress = (currentTime / duration) * 100;
+    var progress = (currentTime / duration) * 100;
     progressBar.style.width = `${progress}%`;
 
     function showGrace() {
@@ -233,6 +237,8 @@ audio.addEventListener("timeupdate", () => {
     }
 
 
+
+
     if ((currentMinutes == totalMinutes) && (currentSeconds == totalSeconds)) {
         // Fade-in grace message
         audio.pause();
@@ -243,7 +249,57 @@ audio.addEventListener("timeupdate", () => {
             hideGrace();
           }, 7000);
     }
+    
 });
+
+function clearTime() {
+    console.log("try stop");
+    progress = 0;
+    progressBar.style.width = '0%';
+    console.log(progressBar.style.width);
+    playPauseButton.innerText = "Start";
+    audio.currentTime = 0;
+    currentMinutes = 0;
+    currentSeconds = 0;
+    isPlaying = false;
+}
+
+arrowRight.addEventListener("click", () => {
+    // Why can't i remove event listener
+    if (duration == 15) {
+        totalTimeDisplay.innerText = "20 minutes";
+        duration = 20;
+        arrowRight.style.cursor = "default";
+    } else if (duration == 10) {
+        totalTimeDisplay.innerText = "15 minutes";
+        arrowLeft.style.cursor = "pointer";
+        duration = 15;
+    }
+
+    audio.pause();
+    setTimeout(() => {
+        clearTime();
+      }, 100);
+})
+
+arrowLeft.addEventListener("click", () => {
+    // Why can't i remove event listener
+    if (duration == 15) {
+        totalTimeDisplay.innerText = "10 minutes";
+        duration = 10;
+        arrowLeft.style.cursor = "default";
+    } else if (duration == 20) {
+        totalTimeDisplay.innerText = "15 minutes";
+        duration = 15;
+        arrowRight.style.cursor = "pointer";
+    }
+
+
+    audio.pause();
+    setTimeout(() => {
+        clearTime();
+      }, 100);
+})
 
 
 

@@ -202,7 +202,7 @@ audio.addEventListener("timeupdate", () => {
     const totalMinutes = Math.floor(duration / 60);
     const totalSeconds = Math.floor(duration % 60);
 
-    const graceSound = new Audio("https://github.com/greysonpeck/sites-of-grace/blob/main/audio/lost_grace_sfx-10.mp3");
+    const graceSound = new Audio("lost_grace_sfx-10.mp3");
     function playGrace() {
         graceSound.play();
     }

@@ -149,6 +149,7 @@ const progressBar = document.getElementById("progress-bar");
 const currentTimeDisplay = document.getElementById("current-time");
 const totalTimeDisplay = document.getElementById("total-time");
 const volumeToggle = document.getElementById("volume-toggle");
+const lostGraceMessage = document.getElementById("grace-discovered");
 
 let isPlaying = false;
 let isVolumeControl = false;
@@ -169,6 +170,7 @@ playPauseButton.addEventListener("click", () => {
     }
     isPlaying = !isPlaying;
 });
+
 
 volumeToggle.addEventListener("click", () => {
     if (isVolumeControl) {
@@ -192,19 +194,58 @@ volumeControl.addEventListener("input", () => {
 
 audio.addEventListener("timeupdate", () => {
     const currentTime = audio.currentTime;
-    const duration = audio.duration;
+    // const duration = audio.duration;
+    const duration = 120;
 
     const currentMinutes = Math.floor(currentTime / 60);
     const currentSeconds = Math.floor(currentTime % 60);
     const totalMinutes = Math.floor(duration / 60);
     const totalSeconds = Math.floor(duration % 60);
 
+    const graceSound = new Audio("../audio/lost_grace_sfx-10.mp3");
+    function playGrace() {
+        graceSound.play();
+    }
+
     currentTimeDisplay.textContent = `${currentMinutes}:${currentSeconds < 10 ? '0' : ''}${currentSeconds}`;
     totalTimeDisplay.textContent = `${totalMinutes}:${totalSeconds < 10 ? '0' : ''}${totalSeconds}`;
 
     const progress = (currentTime / duration) * 100;
     progressBar.style.width = `${progress}%`;
+
+    function showGrace() {
+        playGrace();
+        lostGraceMessage.classList.remove("-z-10");
+        lostGraceMessage.classList.add("z-10");
+        lostGraceMessage.classList.remove("opacity-0");
+        lostGraceMessage.classList.add("opacity-1");
+    }
+
+    function hideGrace() {
+        lostGraceMessage.classList.remove("opacity-1");
+        lostGraceMessage.classList.add("opacity-0");
+
+        // Wait 2000ms for grace to fade out, then set z-index.
+        setTimeout(() => {
+            lostGraceMessage.classList.remove("z-10");
+            lostGraceMessage.classList.add("-z-10");;
+          }, 2000);
+    }
+
+
+    if ((currentMinutes == totalMinutes) && (currentSeconds == totalSeconds)) {
+        // Fade-in grace message
+        audio.pause();
+        showGrace();
+
+        // Wait 7000 ms...
+        setTimeout(() => {
+            hideGrace();
+          }, 7000);
+    }
 });
+
+
 
 var eldenLocation = "Leyndell";
 var audioSource = document.getElementById("audio-source");

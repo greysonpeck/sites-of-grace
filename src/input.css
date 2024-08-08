@@ -15,6 +15,10 @@ body {
     font-family: "Agmena Pro Book";
 }
 
+#grace-discovered {
+  transition: opacity 2000ms ease-in, visibility 0ms ease-in 0ms;
+}
+
 #myContainer {
     margin-top: 40px;
     background-color: rgba(0,0,0,.3);

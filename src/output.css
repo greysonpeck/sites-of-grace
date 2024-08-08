@@ -663,12 +663,20 @@ video {
   inset-inline-end: 0.25rem;
 }
 
+.right-0 {
+  right: 0px;
+}
+
+.right-1\/4 {
+  right: 25%;
+}
+
 .top-3 {
   top: 0.75rem;
 }
 
-.right-0 {
-  right: 0px;
+.top-\[20vh\] {
+  top: 20vh;
 }
 
 .top-\[5px\] {
@@ -681,6 +689,14 @@ video {
 
 .isolation-auto {
   isolation: auto;
+}
+
+.-z-10 {
+  z-index: -10;
+}
+
+.z-10 {
+  z-index: 10;
 }
 
 .float-start {
@@ -729,6 +745,10 @@ video {
 
 .m-auto {
   margin: auto;
+}
+
+.-mt-\[10px\] {
+  margin-top: -10px;
 }
 
 .ml-2 {
@@ -858,12 +878,20 @@ video {
   display: none;
 }
 
+.h-full {
+  height: 100%;
+}
+
 .w-4\/5 {
   width: 80%;
 }
 
 .w-7 {
   width: 1.75rem;
+}
+
+.w-\[150\%\] {
+  width: 150%;
 }
 
 .w-\[280px\] {
@@ -885,6 +913,10 @@ video {
 .w-fit {
   width: -moz-fit-content;
   width: fit-content;
+}
+
+.max-w-\[150\%\] {
+  max-width: 150%;
 }
 
 .max-w-\[273px\] {
@@ -1866,6 +1898,15 @@ video {
   background-color: rgb(255 0 0 / var(--tw-bg-opacity));
 }
 
+.bg-gray-900 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+}
+
+.bg-opacity-50 {
+  --tw-bg-opacity: 0.5;
+}
+
 .decoration-slice {
   -webkit-box-decoration-break: slice;
           box-decoration-break: slice;
@@ -2560,6 +2601,10 @@ body {
   background-position: center;
   background-size: cover;
   font-family: "Agmena Pro Book";
+}
+
+#grace-discovered {
+  transition: opacity 2000ms ease-in, visibility 0ms ease-in 0ms;
 }
 
 #myContainer {

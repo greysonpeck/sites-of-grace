@@ -55,7 +55,7 @@ var myContainer = document.getElementById("myContainer");
 
 
 function toggleCheckbox(element)
- {
+ {   
     scanBoxes();
  }
 
@@ -63,7 +63,7 @@ function toggleCheckbox(element)
     if (state == "on") {
         return `
             <label class="check-on" tabindex="0">
-            <input type="checkbox" onchange="toggleCheckbox()" id="day1" name="settings" checked>
+            <input type="checkbox" onchange="toggleCheckbox(this)" id="day1" name="settings" checked>
             <span class="siteofgrace">`+day+`</span>
             </label>
             `
@@ -72,7 +72,7 @@ function toggleCheckbox(element)
     else {
         return `
             <label class="check-off" tabindex="0">
-            <input type="checkbox" onchange="toggleCheckbox()" id="day1" name="settings">
+            <input type="checkbox" onchange="toggleCheckbox(this)" id="day1" name="settings">
             <span class="siteofgrace">`+day+`</span>
             </label>
             `
@@ -82,7 +82,7 @@ function toggleCheckbox(element)
 function makeBoxes(){
     for (i = 0; i < currentCode.length; i++) {
         if (currentCode.charAt(i) == 1) {
-                myContainer.insertAdjacentHTML('beforeend',checkboxMarkup("on",i+1));
+            myContainer.insertAdjacentHTML('beforeend',checkboxMarkup("on",i+1));
         }
         else {
             myContainer.insertAdjacentHTML('beforeend',checkboxMarkup("off",i+1));

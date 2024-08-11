@@ -895,6 +895,10 @@ video {
   display: none;
 }
 
+.h-5 {
+  height: 1.25rem;
+}
+
 .h-fit {
   height: -moz-fit-content;
   height: fit-content;
@@ -2623,7 +2627,6 @@ video {
 }
 
 html, body {
-  /* height: 100%; */
   height: 100vh;
   margin: 0;
 }
@@ -2687,7 +2690,6 @@ label input {
   text-shadow: 0px 0px 4px #CCC29D;
   text-align: center;
   font-size: .75rem;
-  background-image: url(../img/site-off.png)
 }
 
 .check-off > span {
@@ -2695,7 +2697,11 @@ label input {
   text-shadow: 0px 0px 6px #222222;
 }
 
-label input:checked ~ span {
+#myContainer input:not(:checked) ~ span {
+  background-image: url(../img/site-off.png);
+}
+
+#myContainer input:checked ~ span {
   background-image: url(../img/site-on.png);
 }
 
@@ -2722,12 +2728,6 @@ label input:checked ~ span {
 
 .play-and-time {
   background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(85,85,85,0.4) 15%, rgba(85,85,85,0.4) 85%, rgba(0,0,0,0) 100%);
-}
-
-.progress {
-  display: flex;
-  height: 20px;
-  margin-top: 10px;
 }
 
 .progress-bar {

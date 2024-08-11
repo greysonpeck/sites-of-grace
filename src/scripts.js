@@ -29,14 +29,15 @@ function checkCookie() {
         console.log("no cookie found, zeroing out!");
         document.cookie = "code="+zeroesForMonth+"; expires=Wed, 05 Aug 2025 23:00:00 UTC; path=/";
         document.cookie = "lastMonth=8; expires=Wed, 05 Aug 2025 23:00:00 UTC; path=/"
+        document.cookie = "lastLocation=0; expires=Wed, 05 Aug 2025 23:00:00 UTC; path=/"
         console.log("The cookie is now: " + document.cookie);
     } else {
         if (todayDate.getMonth() != getCookie('lastMonth')) {
         console.log("New month since last visit. Resetting!");
         document.cookie = "code="+zeroesForMonth+"; expires=Wed, 05 Aug 2025 23:00:00 UTC; path=/";
-        document.cookie = "lastMonth="+todayDate.getMonth()+"; expires=Wed, 05 Aug 2025 23:00:00 UTC; path=/"
+        document.cookie = "lastMonth="+todayDate.getMonth()+"; expires=Wed, 05 Aug 2025 23:00:00 UTC; path=/";
+   
         }
-        console.log("cookie found: " + document.cookie);
         // console.log("last accessed: " + getLastDate());
     }
 }
@@ -150,16 +151,16 @@ const currentTimeDisplay = document.getElementById("current-time");
 const totalTimeDisplay = document.getElementById("duration");
 const volumeToggle = document.getElementById("volume-toggle");
 const lostGraceMessage = document.getElementById("grace-discovered");
-const arrowLeft = document.getElementById("arrow-left");
-const arrowRight = document.getElementById("arrow-right");
+const timeLeftArrow = document.getElementById("time-left");
+const timeRightArrow = document.getElementById("time-right");
 
 let isPlaying = false;
 let isVolumeControl = false;
 let duration = 900;
 
-let positionCurrent = 2;
-let positionMin = 0;
-let positionMax = 3;
+let timePosCurrent = 2;
+let timePosMin = 0;
+let timePosMax = 3;
 
 const positionTimes = [5, 600, 900, 1200];
 
@@ -282,18 +283,18 @@ function timerReset() {
       }, 100);
 }
 
-arrowRight.addEventListener("click", () => {
-    if (positionCurrent < positionMax) {
+timeRightArrow.addEventListener("click", () => {
+    if (timePosCurrent < timePosMax) {
         // Bump up to the next level
-        arrowLeft.style.cursor = "pointer";
-        positionCurrent ++;
-        duration = positionTimes[positionCurrent];
+        timeLeftArrow.style.cursor = "pointer";
+        timePosCurrent ++;
+        duration = positionTimes[timePosCurrent];
         totalTimeDisplay.innerText = duration/60 + " minutes";
         timerReset();
 
-        if (positionCurrent == positionMax) {            
+        if (timePosCurrent == timePosMax) {            
             // Set default cursor if at max setting
-            arrowRight.style.cursor = "default";
+            timeRightArrow.style.cursor = "default";
         }   else {
             console.log("unexpected error");
         }
@@ -303,19 +304,18 @@ arrowRight.addEventListener("click", () => {
     }
 });
 
-arrowLeft.addEventListener("click", () => {
-    console.log(positionCurrent);
-    if (positionCurrent > positionMin) {
+timeLeftArrow.addEventListener("click", () => {
+    if (timePosCurrent > timePosMin) {
         // Bump up to the next level
-        arrowRight.style.cursor = "pointer";
-        positionCurrent --;
-        duration = positionTimes[positionCurrent];
+        timeRightArrow.style.cursor = "pointer";
+        timePosCurrent --;
+        duration = positionTimes[timePosCurrent];
         totalTimeDisplay.innerText = duration/60 + " minutes";
         timerReset();
 
-        if (positionCurrent == positionMin) {            
+        if (timePosCurrent == timePosMin) {            
             // Set default cursor if at max setting
-            arrowLeft.style.cursor = "default";
+            timeLeftArrow.style.cursor = "default";
             totalTimeDisplay.innerText = duration + " seconds";
         }   else {
             console.log("unexpected error");
@@ -327,19 +327,73 @@ arrowLeft.addEventListener("click", () => {
 });
 
 
-var eldenLocation = "Roundtable Hold";
+// For location and pulling from cookie
+let locPosCurrent = 0;
+const positionLocations = [0, 1, 2];
+const locationLeft = document.getElementById("location-left");
+const locationRight = document.getElementById("location-right");
+var locationTitle = document.getElementById("location-title");
+
+
+locationLeft.addEventListener("click", () => {
+});
+
+locationRight.addEventListener("click", () => {
+    locPosCurrent ++;
+    console.log(positionLocations.length);
+    console.log(locPosCurrent);
+    if (locPosCurrent > (positionLocations.length - 1)) {
+        locPosCurrent = 0;
+        document.cookie = "lastLocation=" + locPosCurrent;
+    } else {
+    switchLocation();
+    audio.load();
+    document.cookie = "lastLocation=" + locPosCurrent;
+    }
+    switchLocation();
+    audio.load();
+    document.cookie = "lastLocation=" + locPosCurrent;
+});
+
+locationLeft.addEventListener("click", () => {
+    locPosCurrent --;
+    console.log(positionLocations.length);
+    console.log(locPosCurrent);
+    if (locPosCurrent < 0) {
+        locPosCurrent = positionLocations.length - 1;
+        document.cookie = "lastLocation=" + locPosCurrent;
+    } else {
+    switchLocation();
+    audio.load();
+    document.cookie = "lastLocation=" + locPosCurrent;
+    }
+    switchLocation();
+    audio.load();
+    document.cookie = "lastLocation=" + locPosCurrent;
+});
+
+
+
 var audioSource = document.getElementById("audio-source");
-var locationTitle = document.getElementById("locationTitle");
 
-function switchPlace() {
-    if (eldenLocation == "Leyndell") {
-        eldenLocation = "Limgrave";
-        audioSource.src = "./audio/limgrave.mp3";
-        audio.load();
-        // pageBackground = "url(../img/scene-limgrave-1.png)";
-        document.body.style.backgroundImage = "url(../img/scene-limgrave-1.png)";
+function switchLocation() {
+    if (positionLocations[locPosCurrent] == 0) {
+        locationTitle.innerText = "Roundtable Hold";
+        audioSource.src = "./audio/roundtable_20.mp3";
+        document.body.style.backgroundImage = "url(../img/scene-roundtable-1.jpg)";
+    } else if (positionLocations[locPosCurrent] == 1) {
         locationTitle.innerText = "Limgrave";
-
+        audioSource.src = "./audio/limgrave_20.mp3";
+        document.body.style.backgroundImage = "url(../img/scene-limgrave-1.png)";
+    } else if (positionLocations[locPosCurrent] == 2) {
+        locationTitle.innerText = "Leyndell, Royal Capital";
+        audioSource.src = "./audio/leyndell_20.mp3";
+        document.body.style.backgroundImage = "url(../img/scene-leyndell-1.png)";
     }
 }
+
+console.log("cookie found: " + document.cookie);
+locPosCurrent = getCookie("lastLocation");
+switchLocation();
+
 

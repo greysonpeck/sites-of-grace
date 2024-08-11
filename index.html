@@ -9,7 +9,7 @@
 </head>
 <body>
     <div id="grace-discovered" class="invisible absolute overflow-hidden align-center justify-center w-screen -mt-[10px] h-full bg-gray-900 bg-opacity-50 opacity-0 -z-10">
-        <img class="h-fit mt-[50%] scale-125 sm:scale-100 sm:mt-auto overflow-clip right-1/4" src="./img/grace-discovered.png" alt="" class="src">
+        <img class="h-fit mt-[50%] scale-150 sm:scale-100 sm:mt-auto overflow-clip right-1/4" src="./img/grace-discovered.png" alt="" class="src">
     </div>
 
     <!-- Stamina bar -->
@@ -32,9 +32,9 @@
             <button id="play-pause-button" class="text-white pl-5 mr-auto">Start</button>
             <div id="current-time" class="text-white opacity-0 w-24 pl-6 ml-2 hidden">0:00</div>
             <div id="time-section" class="flex items-center text-white w-fit pl-1 pr-6">
-                <img id="arrow-left" class="mr-2 opacity-50" width="8px" src="./img/arrow-left.png" alt="" class="src">
+                <img id="time-left" class="arrow-left mr-2 opacity-50" width="8px" src="./img/arrow-left.png" alt="" class="src">
                 <span id="duration" class="w-[4.5rem] text-center">15 minutes</span>
-                <img id="arrow-right" class="ml-2 opacity-50" width="8px" src="./img/arrow-right.png" alt="" class="src"></div>
+                <img id="time-right" class="arrow-right ml-2 opacity-50" width="8px" src="./img/arrow-right.png" alt="" class="src"></div>
         </div>
     </div>
 
@@ -42,10 +42,18 @@
 
 
     <!-- Location Title -->
-    <div class="audio-player sm:w-[400px] w-[280px] mt-32 mx-auto">
+    <div class="audio-player sm:w-[400px] w-[320px] mt-32 mx-auto">
         <div id="location-block">
             <hr>
-            <h2 id="location-title" class="text-2xl sm:text-3xl text-center py-2">Roundtable Hold</h2>
+            <div class="location-and-arrows flex justify-center items-center">
+                <button id="location-left" class="arrow-left w-10 h-10 opacity-50">
+                    <img id="arrow-left" class="mx-auto" width="" src="./img/arrow-left.png" alt="" class="src">
+                </button>
+                <h2 id="location-title" class="mx-auto text-2xl sm:text-3xl text-center py-2">Roundtable Hold</h2>
+                <button id="location-right" class="arrow-right w-10 h-10 opacity-50">
+                    <img id="arrow-right" class="mx-auto" width="" src="./img/arrow-right.png" alt="" class="src">
+                </button>
+            </div>
             <hr>
         </div>
 

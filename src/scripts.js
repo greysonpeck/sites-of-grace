@@ -373,7 +373,7 @@ timeLeftArrow.addEventListener("click", () => {
 
 // For location and pulling from cookie
 let locPosCurrent = 0;
-const positionLocations = [0, 1, 2];
+const positionLocations = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 const locationLeft = document.getElementById("location-left");
 const locationRight = document.getElementById("location-right");
 var locationTitle = document.getElementById("location-title");
@@ -428,9 +428,37 @@ function switchLocation() {
         audioSource.src = "./audio/limgrave_20.mp3";
         document.body.style.backgroundImage = "url(img/scene-limgrave-1.png)";
     } else if (positionLocations[locPosCurrent] == 2) {
+        locationTitle.innerText = "Weeping Peninsula";
+        audioSource.src = "./audio/weeping_20.mp3";
+        document.body.style.backgroundImage = "url(img/scene-weeping-1.png)";
+    } else if (positionLocations[locPosCurrent] == 3) {
+        locationTitle.innerText = "Liurnia of the Lakes";
+        audioSource.src = "./audio/liurnia_20.mp3";
+        document.body.style.backgroundImage = "url(img/scene-liurnia-1.png)";
+    } else if (positionLocations[locPosCurrent] == 4) {
+        locationTitle.innerText = "Deeproot Depths";
+        audioSource.src = "./audio/deeproot_20.mp3";
+        document.body.style.backgroundImage = "url(img/scene-deeproot-1.png)";
+    } else if (positionLocations[locPosCurrent] == 5) {
+        locationTitle.innerText = "Volcano Manor";
+        audioSource.src = "./audio/volcano_20.mp3";
+        document.body.style.backgroundImage = "url(img/scene-volcano-1.png)";
+    } else if (positionLocations[locPosCurrent] == 6) {
         locationTitle.innerText = "Leyndell, Royal Capital";
         audioSource.src = "./audio/leyndell_20.mp3";
         document.body.style.backgroundImage = "url(img/scene-leyndell-1.png)";
+    } else if (positionLocations[locPosCurrent] == 7) {
+        locationTitle.innerText = "Mountaintops of the Giants";
+        audioSource.src = "./audio/mountaintops_20.mp3";
+        document.body.style.backgroundImage = "url(img/scene-mountaintops-1.jpg)";
+    } else if (positionLocations[locPosCurrent] == 8) {
+        locationTitle.innerText = "Haligtree Roots";
+        audioSource.src = "./audio/haligtree_20.mp3";
+        document.body.style.backgroundImage = "url(img/scene-haligtree-1.jpg)";
+    } else if (positionLocations[locPosCurrent] == 9) {
+        locationTitle.innerText = "Crumbling Farum Azula";
+        audioSource.src = "./audio/farumazula_20.mp3";
+        document.body.style.backgroundImage = "url(img/scene-farumazula-1.jpg)";
     }
     audio.load();
 

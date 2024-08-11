@@ -151,7 +151,7 @@ label input {
 #play-pause-button:hover,
 .arrow-right:hover,
 .arrow-left:hover {
-  filter: brightness(.9);
+  filter: brightness(.75);
   cursor: pointer;
 }
 

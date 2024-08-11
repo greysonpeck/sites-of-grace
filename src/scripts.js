@@ -422,15 +422,15 @@ function switchLocation() {
     if (positionLocations[locPosCurrent] == 0) {
         locationTitle.innerText = "Roundtable Hold";
         audioSource.src = "./audio/roundtable_20.mp3";
-        document.body.style.backgroundImage = "url(sites-of-grace/img/scene-roundtable-1.jpg)";
+        document.body.style.backgroundImage = "url(/img/scene-roundtable-1.jpg)";
     } else if (positionLocations[locPosCurrent] == 1) {
         locationTitle.innerText = "Limgrave";
         audioSource.src = "./audio/limgrave_20.mp3";
-        document.body.style.backgroundImage = "url(sites-of-grace/img/scene-limgrave-1.png)";
+        document.body.style.backgroundImage = "url(/img/scene-limgrave-1.png)";
     } else if (positionLocations[locPosCurrent] == 2) {
         locationTitle.innerText = "Leyndell, Royal Capital";
         audioSource.src = "./audio/leyndell_20.mp3";
-        document.body.style.backgroundImage = "url(sites-of-grace/img/scene-leyndell-1.png)";
+        document.body.style.backgroundImage = "url(/img/scene-leyndell-1.png)";
     }
     audio.load();
 

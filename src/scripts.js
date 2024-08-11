@@ -1,9 +1,80 @@
-function getCookie(name) { 
-    var re = new RegExp(name + "=([^;]+)"); 
-    var value = re.exec(document.cookie); 
-    return value[1];
-    // return (value != null) ? unescape(value[1]) : null; 
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Now it's safe to access cookies and perform operations
+
+    console.log("DOM loaded, checking cookie...");
+
+    function getCookie(name) { 
+        var re = new RegExp(name + "=([^;]+)"); 
+        var value = re.exec(document.cookie); 
+        // return value[1];
+        return (value != null) ? unescape(value[1]) : null; 
+    }
+
+    checkCookie();
+
+
+
+    function checkCookie() {
+        if (!document.cookie) {
+            console.log("no cookie found, zeroing out!");
+            document.cookie = "code="+zeroesForMonth+"; expires=Wed, 05 Aug 2025 23:00:00 UTC; path=/";
+            document.cookie = "lastMonth=8; expires=Wed, 05 Aug 2025 23:00:00 UTC; path=/"
+            document.cookie = "lastLocation=0; expires=Wed, 05 Aug 2025 23:00:00 UTC; path=/"
+            console.log("The cookie is now: " + document.cookie);
+        }   
+            else if (todayDate.getMonth() != getCookie('lastMonth')){
+            console.log("New month since last visit. Resetting!");
+            document.cookie = "code="+zeroesForMonth+"; expires=Wed, 05 Aug 2025 23:00:00 UTC; path=/";
+            document.cookie = "lastMonth="+todayDate.getMonth()+"; expires=Wed, 05 Aug 2025 23:00:00 UTC; path=/";
+            }
+            
+            else {
+                console.log("cookie found: " + document.cookie);
+            }
+        
+        
+        locPosCurrent = getCookie("lastLocation");
+        switchLocation();
+    }
+
+
+
+
+    var currentCode = getCookie("code");
+
+    function getCodeCookie() {
+    return new Promise((resolve) => {
+        // Simulate async cookie retrieval
+        setTimeout(() => {
+            // Replace with actual cookie retrieval logic
+            console.log("got code from Promise: " + getCookie("code"));
+            resolve(currentCode);
+        }, 1); // Simulate delay
+    });
 }
+
+
+    function makeBoxes(){
+        for (i = 0; i < currentCode.length; i++) {
+            if (currentCode.charAt(i) == 1) {
+                myContainer.insertAdjacentHTML('beforeend',checkboxMarkup("on",i+1));
+            }
+            else {
+                myContainer.insertAdjacentHTML('beforeend',checkboxMarkup("off",i+1));
+            }
+        }
+        scanBoxes();
+    }
+
+    getCodeCookie().then(currentCode => makeBoxes(currentCode));
+
+
+
+    
+
+});
 
 function getLastDate(name) { 
     var re = new RegExp(name + "=([^;]+)"); 
@@ -24,27 +95,9 @@ for (i = 0; i < daysThisMonth; i++) {
 
 
 
-function checkCookie() {
-    if (!document.cookie) {
-        console.log("no cookie found, zeroing out!");
-        document.cookie = "code="+zeroesForMonth+"; expires=Wed, 05 Aug 2025 23:00:00 UTC; path=/";
-        document.cookie = "lastMonth=8; expires=Wed, 05 Aug 2025 23:00:00 UTC; path=/"
-        document.cookie = "lastLocation=0; expires=Wed, 05 Aug 2025 23:00:00 UTC; path=/"
-        console.log("The cookie is now: " + document.cookie);
-    } else {
-        if (todayDate.getMonth() != getCookie('lastMonth')) {
-        console.log("New month since last visit. Resetting!");
-        document.cookie = "code="+zeroesForMonth+"; expires=Wed, 05 Aug 2025 23:00:00 UTC; path=/";
-        document.cookie = "lastMonth="+todayDate.getMonth()+"; expires=Wed, 05 Aug 2025 23:00:00 UTC; path=/";
-   
-        }
-        // console.log("last accessed: " + getLastDate());
-    }
-}
 
-checkCookie();
 
-var currentCode = getCookie('code');
+// var currentCode = getCookie('code');
 
 function setCookie(cvalue) {
     document.cookie = "code="+cvalue+"; expires=Wed, 05 Aug 2025 23:00:00 UTC; path=/;";
@@ -80,16 +133,7 @@ function toggleCheckbox(element)
     }
 }
 
-function makeBoxes(){
-    for (i = 0; i < currentCode.length; i++) {
-        if (currentCode.charAt(i) == 1) {
-            myContainer.insertAdjacentHTML('beforeend',checkboxMarkup("on",i+1));
-        }
-        else {
-            myContainer.insertAdjacentHTML('beforeend',checkboxMarkup("off",i+1));
-        }
-    }
-}
+
 
 function scanBoxes(){
     var allCheckboxes = myContainer.getElementsByTagName("input")
@@ -109,8 +153,8 @@ function scanBoxes(){
 
 
 
-makeBoxes();
-scanBoxes();
+
+// makeBoxes();
 
 
 // Select all checkboxes with the name 'settings' using querySelectorAll.
@@ -364,11 +408,9 @@ locationLeft.addEventListener("click", () => {
         document.cookie = "lastLocation=" + locPosCurrent;
     } else {
     switchLocation();
-    audio.load();
     document.cookie = "lastLocation=" + locPosCurrent;
     }
     switchLocation();
-    audio.load();
     document.cookie = "lastLocation=" + locPosCurrent;
 });
 
@@ -390,10 +432,9 @@ function switchLocation() {
         audioSource.src = "./audio/leyndell_20.mp3";
         document.body.style.backgroundImage = "url(/img/scene-leyndell-1.png)";
     }
+    audio.load();
+
 }
 
-console.log("cookie found: " + document.cookie);
-locPosCurrent = getCookie("lastLocation");
-switchLocation();
 
 

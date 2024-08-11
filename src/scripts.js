@@ -157,6 +157,12 @@ let isPlaying = false;
 let isVolumeControl = false;
 let duration = 900;
 
+let positionCurrent = 2;
+let positionMin = 0;
+let positionMax = 3;
+
+const positionTimes = [5, 600, 900, 1200];
+
 playPauseButton.addEventListener("click", () => {
     if (isPlaying) {
         audio.pause();
@@ -221,8 +227,12 @@ audio.addEventListener("timeupdate", () => {
         playGrace();
         lostGraceMessage.classList.remove("-z-10");
         lostGraceMessage.classList.add("z-10");
+        lostGraceMessage.classList.add("flex");
+        lostGraceMessage.classList.remove("invisible");
         lostGraceMessage.classList.remove("opacity-0");
         lostGraceMessage.classList.add("opacity-1");
+
+
     }
 
     function hideGrace() {
@@ -231,6 +241,9 @@ audio.addEventListener("timeupdate", () => {
 
         // Wait 2000ms for grace to fade out, then set z-index.
         setTimeout(() => {
+            lostGraceMessage.classList.remove("flex");
+            lostGraceMessage.classList.add("invisible");
+
             lostGraceMessage.classList.remove("z-10");
             lostGraceMessage.classList.add("-z-10");;
           }, 2000);
@@ -253,10 +266,8 @@ audio.addEventListener("timeupdate", () => {
 });
 
 function clearTime() {
-    console.log("try stop");
     progress = 0;
     progressBar.style.width = '0%';
-    console.log(progressBar.style.width);
     playPauseButton.innerText = "Start";
     audio.currentTime = 0;
     currentMinutes = 0;
@@ -264,40 +275,56 @@ function clearTime() {
     isPlaying = false;
 }
 
-arrowRight.addEventListener("click", () => {
-    // Why can't i remove event listener
-    if (duration == 900) {
-        totalTimeDisplay.innerText = "20 minutes";
-        duration = 1200;
-        arrowRight.style.cursor = "default";
-    } else if (duration == 600) {
-        totalTimeDisplay.innerText = "15 minutes";
-        arrowLeft.style.cursor = "pointer";
-        duration = 900;
-    }
+function timerReset() {
     audio.pause();
     setTimeout(() => {
         clearTime();
       }, 100);
-})
+}
+
+arrowRight.addEventListener("click", () => {
+    if (positionCurrent < positionMax) {
+        // Bump up to the next level
+        arrowLeft.style.cursor = "pointer";
+        positionCurrent ++;
+        duration = positionTimes[positionCurrent];
+        totalTimeDisplay.innerText = duration/60 + " minutes";
+        timerReset();
+
+        if (positionCurrent == positionMax) {            
+            // Set default cursor if at max setting
+            arrowRight.style.cursor = "default";
+        }   else {
+            console.log("unexpected error");
+        }
+    }
+        else {
+            console.log("unexpected error");
+    }
+});
 
 arrowLeft.addEventListener("click", () => {
-    // Why can't i remove event listener
-    if (duration == 900) {
-        totalTimeDisplay.innerText = "10 minutes";
-        duration = 600;
-        arrowLeft.style.cursor = "default";
-    } else if (duration == 1200) {
-        totalTimeDisplay.innerText = "15 minutes";
-        duration = 900;
+    console.log(positionCurrent);
+    if (positionCurrent > positionMin) {
+        // Bump up to the next level
         arrowRight.style.cursor = "pointer";
-    }
-    audio.pause();
-    setTimeout(() => {
-        clearTime();
-      }, 100);
-})
+        positionCurrent --;
+        duration = positionTimes[positionCurrent];
+        totalTimeDisplay.innerText = duration/60 + " minutes";
+        timerReset();
 
+        if (positionCurrent == positionMin) {            
+            // Set default cursor if at max setting
+            arrowLeft.style.cursor = "default";
+            totalTimeDisplay.innerText = duration + " seconds";
+        }   else {
+            console.log("unexpected error");
+        }
+    }
+        else {
+            console.log("unexpected error");
+    }
+});
 
 
 var eldenLocation = "Roundtable Hold";

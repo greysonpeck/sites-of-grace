@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html, body {
-    height: 100vh;
+    height: 100%;
     margin: 0;
 }
 
@@ -12,6 +12,8 @@ body {
     background-position: center;
     background-size: cover;
     font-family: "Agmena Pro Book";
+    display: flex;
+    flex-direction: column;
 }
 
 #grace-discovered {
@@ -24,7 +26,6 @@ body {
     backdrop-filter: blur(3px);
     border-radius: 8px;
     box-shadow: 0 0 10px 10px rgba(0,0,0,.3);
-    padding-bottom: 24px;
     }
 
 label {
@@ -52,7 +53,7 @@ label input {
     height: 44px;
 }
 
-#myContainer span {
+#myContainer div {
     position: absolute;
     top: 0;
     left: 0;
@@ -67,18 +68,27 @@ label input {
     font-size: .75rem;
 }
 
-.check-off > span {
+.check-off > div {
     color:  #c1c1c1;
     text-shadow: 0px 0px 6px #222222;
 
 }
 
-#myContainer input:not(:checked) ~ span {
+#myContainer input:not(:checked) ~ div {
   background-image: url(../img/site-off.png);
 }
 
-#myContainer input:checked ~ span {
+#myContainer input:checked ~ div {
   background-image: url(../img/site-on.png);
+}
+
+.calendar-day {
+  visibility: hidden;
+}
+
+.today-day {
+  font-size: 1.25rem;
+  line-height: 1.25rem;
 }
 
 
@@ -139,7 +149,6 @@ label input {
     }
 }
 #stamina-left {
-    left: -29px;
     top: -2px;
     height: 20px;
 }

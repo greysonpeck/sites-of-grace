@@ -61,9 +61,13 @@ document.addEventListener('DOMContentLoaded', () => {
             if (currentCode.charAt(i) == 1) {
                 myContainer.insertAdjacentHTML('beforeend',checkboxMarkup("on",i+1));
             }
+            else if ((currentCode.charAt(i) != 1) && (i+1 == todayDay)) {
+                myContainer.insertAdjacentHTML('beforeend',checkboxMarkup("today",i+1));
+            }
             else {
                 myContainer.insertAdjacentHTML('beforeend',checkboxMarkup("off",i+1));
             }
+
         }
         scanBoxes();
     }
@@ -85,6 +89,7 @@ function getLastDate(name) {
 
 // Date stuff
 const todayDate = new Date();
+const todayDay = todayDate.getDate();
 const daysInMonth = (year, month) => new Date(year, month, 0).getDate();
 const daysThisMonth = daysInMonth(todayDate.getFullYear(), todayDate.getMonth());
 
@@ -118,18 +123,27 @@ function toggleCheckbox(element)
         return `
             <label class="check-on" tabindex="0">
             <input type="checkbox" onchange="toggleCheckbox(this)" id="day1" name="settings" checked>
-            <span class="siteofgrace">`+day+`</span>
+            <div class="siteofgrace"><span class="calendar-day">`+day+`</span></div>
+            </label>
+            `
+    }
+    else if (state =="off") {
+        return `
+            <label class="check-off" tabindex="0">
+            <input type="checkbox" onchange="toggleCheckbox(this)" id="day1" name="settings">
+            <div class="siteofgrace"><span class="calendar-day">`+day+`</span></div>
             </label>
             `
     }
 
+    // Day is today
     else {
         return `
-            <label class="check-off" tabindex="0">
-            <input type="checkbox" onchange="toggleCheckbox(this)" id="day1" name="settings">
-            <span class="siteofgrace">`+day+`</span>
-            </label>
-            `
+        <label class="check-off" tabindex="0">
+        <input type="checkbox" onchange="toggleCheckbox(this)" id="day1" name="settings">
+        <div class="siteofgrace"><span class="today-day">`+day+`</span></div>
+        </label>
+        `
     }
 }
 

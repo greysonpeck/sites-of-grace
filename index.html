@@ -9,7 +9,7 @@
 </head>
 <body>
     <div id="grace-discovered" class="invisible absolute overflow-hidden align-center justify-center w-screen -mt-[10px] h-full bg-gray-900 bg-opacity-50 opacity-0 -z-10">
-        <img class="h-fit mt-[50%] scale-150 sm:scale-100 sm:mt-auto overflow-clip right-1/4" src="./img/grace-discovered.png" alt="" class="src">
+        <img class="h-fit w-full mt-[50%] scale-150 sm:scale-100 sm:mt-auto overflow-clip right-1/4" src="./img/grace-discovered.png" alt="" class="src">
     </div>
 
     <!-- Stamina bar -->
@@ -28,12 +28,12 @@
     <!-- Start and timer -->
     <div class="controls flex flex-col">
 
-        <div class="play-and-time flex w-48 mt-3 ml-7">
+        <div class="play-and-time flex w-52 mt-3 ml-7 text-lg">
             <button id="play-pause-button" class="text-white pl-5 mr-auto">Start</button>
             <div id="current-time" class="text-white opacity-0 w-24 pl-6 ml-2 hidden">0:00</div>
             <div id="time-section" class="flex items-center text-white w-fit pl-1 pr-6">
                 <img id="time-left" class="arrow-left mr-2 opacity-50" width="8px" src="./img/arrow-left.png" alt="" class="src">
-                <span id="duration" class="w-[4.5rem] text-center">15 minutes</span>
+                <span id="duration" class="w-20 text-center">15 minutes</span>
                 <img id="time-right" class="arrow-right ml-2 opacity-50" width="8px" src="./img/arrow-right.png" alt="" class="src"></div>
         </div>
     </div>
@@ -42,7 +42,7 @@
 
 
     <!-- Location Title -->
-    <div class="audio-player sm:w-[400px] w-[320px] mt-32 mx-auto">
+    <div class="audio-player sm:w-[400px] w-[320px] mt-20 sm:mt-32 mx-auto">
         <div id="location-block">
             <hr>
             <div class="location-and-arrows flex justify-center items-center">
@@ -65,7 +65,7 @@
 
 
     <!-- Sites of Grace -->
-    <div id="myContainer" class="flex flex-wrap justify-center m-auto pt-8 gap-2 w-4/5 sm:max-w-96"></div>
+    <div id="myContainer" class="flex flex-wrap justify-center m-auto pt-8 pb-10 gap-2 w-4/5 sm:max-w-96"></div>
 
 <!-- music -->
     <!-- <audio id="music" preload="all">

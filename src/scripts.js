@@ -431,48 +431,49 @@ locationLeft.addEventListener("click", () => {
 
 
 var audioSource = document.getElementById("audio-source");
+var backgroundScene = document.getElementById("bg");
 
 function switchLocation() {
     if (positionLocations[locPosCurrent] == 0) {
         locationTitle.innerText = "Roundtable Hold";
         audioSource.src = "./audio/roundtable_20.mp3";
-        document.body.style.backgroundImage = "url(img/scene-roundtable-1.jpg)";
+        backgroundScene.style.backgroundImage = "url(img/scene-roundtable-1.jpg)";
     } else if (positionLocations[locPosCurrent] == 1) {
         locationTitle.innerText = "Limgrave";
         audioSource.src = "./audio/limgrave_20.mp3";
-        document.body.style.backgroundImage = "url(img/scene-limgrave-1.png)";
+        backgroundScene.style.backgroundImage = "url(img/scene-limgrave-1.png)";
     } else if (positionLocations[locPosCurrent] == 2) {
         locationTitle.innerText = "Weeping Peninsula";
         audioSource.src = "./audio/weeping_20.mp3";
-        document.body.style.backgroundImage = "url(img/scene-weeping-1.png)";
+        backgroundScene.style.backgroundImage = "url(img/scene-weeping-1.png)";
     } else if (positionLocations[locPosCurrent] == 3) {
         locationTitle.innerText = "Liurnia of the Lakes";
         audioSource.src = "./audio/liurnia_20.mp3";
-        document.body.style.backgroundImage = "url(img/scene-liurnia-1.png)";
+        backgroundScene.style.backgroundImage = "url(img/scene-liurnia-1.png)";
     } else if (positionLocations[locPosCurrent] == 4) {
         locationTitle.innerText = "Deeproot Depths";
         audioSource.src = "./audio/deeproot_20.mp3";
-        document.body.style.backgroundImage = "url(img/scene-deeproot-1.png)";
+        backgroundScene.style.backgroundImage = "url(img/scene-deeproot-1.png)";
     } else if (positionLocations[locPosCurrent] == 5) {
         locationTitle.innerText = "Volcano Manor";
         audioSource.src = "./audio/volcano_20.mp3";
-        document.body.style.backgroundImage = "url(img/scene-volcano-1.png)";
+        backgroundScene.style.backgroundImage = "url(img/scene-volcano-1.png)";
     } else if (positionLocations[locPosCurrent] == 6) {
         locationTitle.innerText = "Leyndell, Royal Capital";
         audioSource.src = "./audio/leyndell_20.mp3";
-        document.body.style.backgroundImage = "url(img/scene-leyndell-1.png)";
+        backgroundScene.style.backgroundImage = "url(img/scene-leyndell-1.png)";
     } else if (positionLocations[locPosCurrent] == 7) {
         locationTitle.innerText = "Mountaintops of the Giants";
         audioSource.src = "./audio/mountaintops_20.mp3";
-        document.body.style.backgroundImage = "url(img/scene-mountaintops-1.jpg)";
+        backgroundScene.style.backgroundImage = "url(img/scene-mountaintops-1.jpg)";
     } else if (positionLocations[locPosCurrent] == 8) {
         locationTitle.innerText = "Haligtree Roots";
         audioSource.src = "./audio/haligtree_20.mp3";
-        document.body.style.backgroundImage = "url(img/scene-haligtree-1.jpg)";
+        backgroundScene.style.backgroundImage = "url(img/scene-haligtree-1.jpg)";
     } else if (positionLocations[locPosCurrent] == 9) {
         locationTitle.innerText = "Crumbling Farum Azula";
         audioSource.src = "./audio/farumazula_20.mp3";
-        document.body.style.backgroundImage = "url(img/scene-farumazula-1.jpg)";
+        backgroundScene.style.backgroundImage = "url(img/scene-farumazula-1.jpg)";
     }
     audio.load();
 

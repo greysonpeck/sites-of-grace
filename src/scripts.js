@@ -122,7 +122,7 @@ function toggleCheckbox(element)
     if (state == "on") {
         return `
             <label class="check-on" tabindex="0">
-            <input type="checkbox" onchange="toggleCheckbox(this)" id="day1" name="settings" checked>
+            <input type="checkbox" onchange="toggleCheckbox(this)" id="day1" name="settings" checked onclick="return false">
             <div class="siteofgrace"><span class="calendar-day">`+day+`</span></div>
             </label>
             `
@@ -130,7 +130,7 @@ function toggleCheckbox(element)
     else if (state =="off") {
         return `
             <label class="check-off" tabindex="0">
-            <input type="checkbox" onchange="toggleCheckbox(this)" id="day1" name="settings">
+            <input type="checkbox" onchange="toggleCheckbox(this)" id="day1" name="settings" onclick="return false">
             <div class="siteofgrace"><span class="calendar-day">`+day+`</span></div>
             </label>
             `
@@ -140,8 +140,8 @@ function toggleCheckbox(element)
     else {
         return `
         <label class="check-off" tabindex="0">
-        <input type="checkbox" onchange="toggleCheckbox(this)" id="day1" name="settings">
-        <div class="siteofgrace"><span class="today-day">`+day+`</span></div>
+        <input type="checkbox" id="today-check" onchange="toggleCheckbox(this)" id="day1" name="settings">
+        <div id="today-day" class="siteofgrace"></div><span class="today-number">`+day+`</span>
         </label>
         `
     }
@@ -163,13 +163,12 @@ function scanBoxes(){
     setCookie(dayBinary);
 }
 
+// function something() {
+//     const allCheckboxes = document.getElementsByName("input:checkbox");
+//     allCheckboxes.onclick = false;
+// }
 
-
-
-
-
-// makeBoxes();
-
+// something();
 
 // Select all checkboxes with the name 'settings' using querySelectorAll.
 var checkboxes = document.querySelectorAll("input[type=checkbox][name=settings]");
@@ -290,8 +289,6 @@ audio.addEventListener("timeupdate", () => {
         lostGraceMessage.classList.remove("invisible");
         lostGraceMessage.classList.remove("opacity-0");
         lostGraceMessage.classList.add("opacity-1");
-
-
     }
 
     function hideGrace() {
@@ -315,6 +312,11 @@ audio.addEventListener("timeupdate", () => {
         // Fade-in grace message
         audio.pause();
         showGrace();
+
+        // Check box
+        const todayCheck = document.getElementById("today-check");
+        todayCheck.checked = true;
+        scanBoxes();
 
         // Wait 7000 ms...
         setTimeout(() => {

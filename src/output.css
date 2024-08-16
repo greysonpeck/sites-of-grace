@@ -2739,7 +2739,6 @@ label input {
   height: 44px;
   width: 44px;
   padding: 12px;
-  padding-top: 13;
   font-weight: 500;
   color: #f2f0e1;
   text-shadow: 0px 0px 4px #CCC29D;
@@ -2753,13 +2752,14 @@ label input {
 }
 
 #myContainer input:not(:checked) ~ div {
-  background-image: url(../img/site-off-4x.png);
+  background-image: url(../img/site-off-sharp.png);
+  opacity: 0.5
   /* width: 44px;
   height: 44px; */
 }
 
 #myContainer input:checked ~ div {
-  background-image: url(../img/site-on-4x.png);
+  background-image: url(../img/site-on-sharp.png);
   /* width: 44px;
   height: 44px; */
 }
@@ -2768,9 +2768,21 @@ label input {
   visibility: hidden;
 }
 
-.today-day {
+#myContainer input:not(:checked) ~ #today-day {
+  opacity: 1;
+  filter: blur(0.5px) brightness(0.85);
+  box-shadow: 0 0 12px 7px #d5d4d0dd;
+  border-radius: 25px;
+}
+
+.today-number {
   font-size: 1.25rem;
-  line-height: 1.25rem;
+  position: absolute;
+  color: white;
+  text-align: center;
+  width: 100%;
+  line-height: 2.75rem;
+  opacity: 0.8;
 }
 
 .location-and-arrows {

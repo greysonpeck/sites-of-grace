@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face{
+  font-family: "Agmena Pro Book";
+  src: url(./agmena-pro-book.ttf) format("truetype"),;
+  font-weight:normal;
+  font-style:normal;
+  font-display:swap;
+} 
+
 html, body {
     height: 100%;
     margin: 0;

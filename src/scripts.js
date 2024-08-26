@@ -49,7 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Simulate async cookie retrieval
         setTimeout(() => {
             // Replace with actual cookie retrieval logic
-            console.log("got code from Promise: " + getCookie("code"));
             resolve(currentCode);
         }, 1); // Simulate delay
     });
@@ -225,12 +224,10 @@ playPauseButton.addEventListener("click", () => {
     if (isPlaying) {
         audio.pause();
         playPauseButton.textContent = "";
-        console.log("shoud be pausing");
         playPauseButton.innerText = "Start";
     } else {
         audio.play();
         playPauseButton.textContent = "";
-        console.log("should be playing");
         playPauseButton.innerText = "Pause";
         currentTimeDisplay.classList.remove("opacity-0");
         currentTimeDisplay.classList.add("opacity-90");
@@ -316,7 +313,12 @@ audio.addEventListener("timeupdate", () => {
         // Check box
         const todayCheck = document.getElementById("today-check");
         todayCheck.checked = true;
-        scanBoxes();
+
+        if (totalSeconds > 5) {
+            scanBoxes();
+        } else {
+            // Testing mode, don't cookie
+        }
 
         // Wait 7000 ms...
         setTimeout(() => {
@@ -350,7 +352,7 @@ timeRightArrow.addEventListener("click", () => {
         timePosCurrent ++;
         duration = positionTimes[timePosCurrent];
         totalTimeDisplay.innerText = duration/60 + " minutes";
-        timerReset();
+        clearTime();
 
         if (timePosCurrent == timePosMax) {            
             // Set default cursor if at max setting
@@ -371,7 +373,7 @@ timeLeftArrow.addEventListener("click", () => {
         timePosCurrent --;
         duration = positionTimes[timePosCurrent];
         totalTimeDisplay.innerText = duration/60 + " minutes";
-        timerReset();
+        clearTime();
 
         if (timePosCurrent == timePosMin) {            
             // Set default cursor if at max setting
@@ -402,6 +404,7 @@ locationRight.addEventListener("click", () => {
     locPosCurrent ++;
     console.log(positionLocations.length);
     console.log(locPosCurrent);
+    clearTime();
     if (locPosCurrent > (positionLocations.length - 1)) {
         locPosCurrent = 0;
         document.cookie = "lastLocation=" + locPosCurrent;
@@ -419,6 +422,7 @@ locationLeft.addEventListener("click", () => {
     locPosCurrent --;
     console.log(positionLocations.length);
     console.log(locPosCurrent);
+    clearTime();
     if (locPosCurrent < 0) {
         locPosCurrent = positionLocations.length - 1;
         document.cookie = "lastLocation=" + locPosCurrent;

@@ -174,7 +174,10 @@ label input {
 
 .play-and-time {
     background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(85,85,85,0.4) 15%, rgba(85,85,85,0.4) 85%, rgba(0,0,0,0) 100%);
+}
 
+.progress {
+  max-width: 280px
 }
 
 .progress-bar {
@@ -195,16 +198,32 @@ label input {
     background: linear-gradient(90deg, rgba(34,34,34,0) 0%, rgba(34,34,34,0) 8%, rgba(34,34,34,.4) 8%, rgba(34,34,34,.4) 100%, rgba(34,34,34,0)100%)
 }
 
-@media screen and (min-width: 640px) {
-    .progress-dark-bg {
-        width: 393px;
-        background: linear-gradient(90deg, rgba(34,34,34,0) 0%, rgba(34,34,34,0) 5.5%, rgba(34,34,34,.4) 5.5%, rgba(34,34,34,.4) 100%, rgba(34,34,34,0)100%)
-
-    }
-}
 #stamina-left {
     top: -2px;
     height: 20px;
+}
+
+#stamina-right {
+  position: absolute;
+  height: 20px;
+  top: 8px;
+  left: 280px;
+}
+
+@media screen and (min-width: 640px) {
+  .progress {
+    max-width: 400px;
+  }
+
+  .progress-dark-bg {
+      width: 390px;
+      background: linear-gradient(90deg, rgba(34,34,34,0) 0%, rgba(34,34,34,0) 5.5%, rgba(34,34,34,.4) 5.5%, rgba(34,34,34,.4) 100%, rgba(34,34,34,0)100%)
+  }
+
+  #stamina-right {
+    top: 8px;
+    left: 401px;
+  }
 }
 
 #current-time {

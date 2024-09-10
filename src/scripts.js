@@ -352,6 +352,7 @@ timeRightArrow.addEventListener("click", () => {
         timePosCurrent ++;
         duration = positionTimes[timePosCurrent];
         totalTimeDisplay.innerText = duration/60 + " minutes";
+        audio.pause();
         clearTime();
 
         if (timePosCurrent == timePosMax) {            
@@ -373,6 +374,7 @@ timeLeftArrow.addEventListener("click", () => {
         timePosCurrent --;
         duration = positionTimes[timePosCurrent];
         totalTimeDisplay.innerText = duration/60 + " minutes";
+        audio.pause();  
         clearTime();
 
         if (timePosCurrent == timePosMin) {            

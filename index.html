@@ -1,80 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./src/output.css">
-    <!-- <link href="https://db.onlinewebfonts.com/c/342059cdb5197a064e40738c5fdc8727?family=Agmena+Pro+Book" rel="stylesheet">  -->
-   
-    <title>Document</title>
-</head>
-<body>
-    <div id="bg" style="background-image: url('img/scene-roundtable-1.jpg');">
-  </div>
-    <div id="grace-discovered" class="invisible absolute overflow-hidden align-center justify-center w-screen -mt-[10px] h-full bg-gray-900 bg-opacity-50 opacity-0 -z-10">
-        <img class="h-fit w-full mt-[50%] scale-150 sm:scale-100 sm:mt-auto overflow-clip right-1/4" src="./img/grace-discovered.png" alt="" class="src">
-    </div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./src/output.css" />
+        <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
+        <!-- <link href="https://db.onlinewebfonts.com/c/342059cdb5197a064e40738c5fdc8727?family=Agmena+Pro+Book" rel="stylesheet">  -->
 
-    <!-- Stamina bar -->
-    <div class="progress-and-volume">
-        <div class="progress flex h-5 ml-5 pt-2">
-            <div class="progress-dark-bg"></div>
-            <img id="stamina-left" src="./img/stamina-left-4.png" alt="" class="">
-            <img id="stamina-right" src="./img/stamina-right-5.png" alt="" class="">
-            <div class="progress-bar" id="progress-bar"></div>
+        <title>Sites of Grace</title>
+    </head>
+    <body>
+        <div id="bg" style="background-image: url('img/scene-roundtable-1.jpg')"></div>
+        <div
+            id="grace-discovered"
+            class="invisible absolute overflow-hidden align-center justify-center w-screen -mt-[10px] h-full bg-gray-900 bg-opacity-50 opacity-0 -z-10"
+        >
+            <img class="h-fit w-full mt-[50%] scale-150 sm:scale-100 sm:mt-auto overflow-clip right-1/4" src="./img/grace-discovered.png" alt="" class="src" />
         </div>
-        <div class="volume-stuff absolute right-0 top-[5px]">
-            <img id="volume-toggle" src="./img/volume-on.svg" class="volume ml-auto w-7 mr-3 top-3 relative" alt="" class="src">
-            <input type="range" id="volume-control" class="volume-slider pt-5 hidden" min="0" max="1" step="0.01" value="1">
-        </div>
-    </div>
 
-    <!-- Start and timer -->
-    <div class="controls flex flex-col">
-
-        <div class="play-and-time flex w-52 mt-3 ml-7 text-lg">
-            <button id="play-pause-button" class="text-white pl-5 mr-auto">Start</button>
-            <div id="current-time" class="text-white opacity-0 w-24 pl-6 ml-2 hidden">0:00</div>
-            <div id="time-section" class="flex items-center text-white w-fit pl-1 pr-6">
-                <img id="time-left" class="arrow-left mr-2 opacity-50" width="8px" src="./img/arrow-left.png" alt="" class="src">
-                <span id="duration" class="w-20 text-center">15 minutes</span>
-                <img id="time-right" class="arrow-right ml-2 opacity-50" width="8px" src="./img/arrow-right.png" alt="" class="src"></div>
-        </div>
-    </div>
-
-
-
-
-    <!-- Location Title -->
-    <div class="audio-player sm:w-[400px] w-[320px] mt-20 sm:mt-32 mx-auto">
-        <div id="location-block">
-            <hr>
-            <div class="location-and-arrows flex justify-center items-center">
-                <button id="location-left" class="arrow-left w-10 h-10 opacity-50">
-                    <img id="arrow-left" class="mx-auto" width="" src="./img/arrow-left.png" alt="" class="src">
-                </button>
-                <h2 id="location-title" class="mx-auto text-2xl sm:text-3xl text-center py-2">Roundtable Hold</h2>
-                <button id="location-right" class="arrow-right w-10 h-10 opacity-50">
-                    <img id="arrow-right" class="mx-auto" width="" src="./img/arrow-right.png" alt="" class="src">
-                </button>
+        <!-- Stamina bar -->
+        <div class="progress-and-volume">
+            <div class="progress flex h-5 ml-5 pt-2">
+                <div class="progress-dark-bg"></div>
+                <img id="stamina-left" src="./img/stamina-left.png" alt="" class="" />
+                <img id="stamina-right" src="./img/stamina-right.png" alt="" class="" />
+                <div class="progress-bar" id="progress-bar"></div>
             </div>
-            <hr>
+            <div class="volume-stuff absolute right-0 top-[5px]">
+                <img id="volume-toggle" src="./img/volume-on.svg" class="volume ml-auto w-7 mr-3 top-3 relative" alt="" class="src" />
+                <input type="range" id="volume-control" class="volume-slider pt-5 hidden" min="0" max="1" step="0.01" value="1" />
+            </div>
         </div>
 
-        <audio id="audio" controls>
-            <source id="audio-source" src="./audio/roundtable_20.mp3" type="audio/mpeg">
-            Your browser does not support the audio element.
-        </audio>
-    </div>
+        <!-- Start and timer -->
+        <div class="controls flex flex-col">
+            <div class="play-and-time flex w-52 mt-3 ml-7 text-lg">
+                <button id="play-pause-button" class="text-white pl-5 mr-auto">Start</button>
+                <div id="current-time" class="text-white opacity-0 w-24 pl-6 ml-2 hidden">0:00</div>
+                <div id="time-section" class="flex items-center text-white w-fit pl-1 pr-6">
+                    <img id="time-left" class="arrow-left mr-2 opacity-50" width="8px" src="./img/arrow-left.png" alt="" class="src" />
+                    <span id="duration" class="w-20 text-center">15 minutes</span>
+                    <img id="time-right" class="arrow-right ml-2 opacity-50" width="8px" src="./img/arrow-right.png" alt="" class="src" />
+                </div>
+            </div>
+        </div>
 
+        <!-- Location Title -->
+        <div class="audio-player sm:w-[400px] w-[320px] mt-20 sm:mt-32 mx-auto">
+            <div id="location-block">
+                <hr />
+                <div class="location-and-arrows flex justify-center items-center">
+                    <button id="location-left" class="arrow-left w-10 h-10 opacity-50">
+                        <img id="arrow-left" class="mx-auto" width="" src="./img/arrow-left.png" alt="" class="src" />
+                    </button>
+                    <h2 id="location-title" class="mx-auto text-2xl sm:text-3xl text-center py-2">Roundtable Hold</h2>
+                    <button id="location-right" class="arrow-right w-10 h-10 opacity-50">
+                        <img id="arrow-right" class="mx-auto" width="" src="./img/arrow-right.png" alt="" class="src" />
+                    </button>
+                </div>
+                <hr />
+            </div>
 
-    <!-- Sites of Grace -->
-     <div class="container-holder pb-8">
-    <div id="myContainer" class="flex flex-wrap justify-center m-auto pt-8 pb-10 gap-2 w-4/5 sm:max-w-96"></div>
-    </div>
+            <audio id="audio" controls>
+                <source id="audio-source" src="./audio/roundtable_20.mp3" type="audio/mpeg" />
+                Your browser does not support the audio element.
+            </audio>
+        </div>
 
-<!-- music -->
-    <!-- <audio id="music" preload="all">
+        <!-- Sites of Grace -->
+        <div class="container-holder pb-8">
+            <div id="myContainer" class="flex flex-wrap justify-center m-auto pt-8 pb-10 gap-2 w-4/5 sm:max-w-96"></div>
+        </div>
+
+        <!-- music -->
+        <!-- <audio id="music" preload="all">
         <source src="./audio/leyndell.mp3">
      </audio>
      
@@ -83,9 +82,6 @@
        music.play();
      </script> -->
 
-
-
-    <script src="./src/scripts.js"></script>
-
-</body>
+        <script src="./src/scripts.js"></script>
+    </body>
 </html>

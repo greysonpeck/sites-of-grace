@@ -1,89 +1,69 @@
-
-
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
     // Now it's safe to access cookies and perform operations
 
     console.log("DOM loaded, checking cookie...");
 
-    function getCookie(name) { 
-        var re = new RegExp(name + "=([^;]+)"); 
-        var value = re.exec(document.cookie); 
+    function getCookie(name) {
+        var re = new RegExp(name + "=([^;]+)");
+        var value = re.exec(document.cookie);
         // return value[1];
-        return (value != null) ? unescape(value[1]) : null; 
+        return value != null ? unescape(value[1]) : null;
     }
 
     checkCookie();
 
-
-
     function checkCookie() {
         if (!document.cookie) {
             console.log("no cookie found, zeroing out!");
-            document.cookie = "code="+zeroesForMonth+"; expires=Wed, 05 Aug 2025 23:00:00 UTC; path=/";
-            document.cookie = "lastMonth=8; expires=Wed, 05 Aug 2025 23:00:00 UTC; path=/"
-            document.cookie = "lastLocation=0; expires=Wed, 05 Aug 2025 23:00:00 UTC; path=/"
+            document.cookie = "code=" + zeroesForMonth + "; expires=Wed, 05 Aug 2025 23:00:00 UTC; path=/";
+            document.cookie = "lastMonth=8; expires=Wed, 05 Aug 2025 23:00:00 UTC; path=/";
+            document.cookie = "lastLocation=0; expires=Wed, 05 Aug 2025 23:00:00 UTC; path=/";
             console.log("The cookie is now: " + document.cookie);
-        }   
-            else if (todayDate.getMonth() != getCookie('lastMonth')){
+        } else if (todayDate.getMonth() != getCookie("lastMonth")) {
             console.log("New month since last visit. Resetting!");
-            document.cookie = "code="+zeroesForMonth+"; expires=Wed, 05 Aug 2025 23:00:00 UTC; path=/";
-            document.cookie = "lastMonth="+todayDate.getMonth()+"; expires=Wed, 05 Aug 2025 23:00:00 UTC; path=/";
-            }
-            
-            else {
-                console.log("cookie found: " + document.cookie);
-            }
-        
-        
+            document.cookie = "code=" + zeroesForMonth + "; expires=Wed, 05 Aug 2025 23:00:00 UTC; path=/";
+            document.cookie = "lastMonth=" + todayDate.getMonth() + "; expires=Wed, 05 Aug 2025 23:00:00 UTC; path=/";
+        } else {
+            console.log("cookie found: " + document.cookie);
+        }
+
         locPosCurrent = getCookie("lastLocation");
         switchLocation();
     }
 
-
-
-
     var currentCode = getCookie("code");
 
     function getCodeCookie() {
-    return new Promise((resolve) => {
-        // Simulate async cookie retrieval
-        setTimeout(() => {
-            // Replace with actual cookie retrieval logic
-            resolve(currentCode);
-        }, 1); // Simulate delay
-    });
-}
+        return new Promise((resolve) => {
+            // Simulate async cookie retrieval
+            setTimeout(() => {
+                // Replace with actual cookie retrieval logic
+                resolve(currentCode);
+            }, 1); // Simulate delay
+        });
+    }
 
-
-    function makeBoxes(){
+    function makeBoxes() {
         for (i = 0; i < currentCode.length; i++) {
             if (currentCode.charAt(i) == 1) {
-                myContainer.insertAdjacentHTML('beforeend',checkboxMarkup("on",i+1));
+                myContainer.insertAdjacentHTML("beforeend", checkboxMarkup("on", i + 1));
+            } else if (currentCode.charAt(i) != 1 && i + 1 == todayDay) {
+                myContainer.insertAdjacentHTML("beforeend", checkboxMarkup("today", i + 1));
+            } else {
+                myContainer.insertAdjacentHTML("beforeend", checkboxMarkup("off", i + 1));
             }
-            else if ((currentCode.charAt(i) != 1) && (i+1 == todayDay)) {
-                myContainer.insertAdjacentHTML('beforeend',checkboxMarkup("today",i+1));
-            }
-            else {
-                myContainer.insertAdjacentHTML('beforeend',checkboxMarkup("off",i+1));
-            }
-
         }
         scanBoxes();
     }
 
-    getCodeCookie().then(currentCode => makeBoxes(currentCode));
-
-
-
-    
-
+    getCodeCookie().then((currentCode) => makeBoxes(currentCode));
 });
 
-function getLastDate(name) { 
-    var re = new RegExp(name + "=([^;]+)"); 
-    var value = re.exec(document.cookie); 
+function getLastDate(name) {
+    var re = new RegExp(name + "=([^;]+)");
+    var value = re.exec(document.cookie);
     return value[4];
-    // return (value != null) ? unescape(value[1]) : null; 
+    // return (value != null) ? unescape(value[1]) : null;
 }
 
 // Date stuff
@@ -97,65 +77,66 @@ for (i = 0; i < daysThisMonth; i++) {
     zeroesForMonth += "0";
 }
 
-
-
-
-
 // var currentCode = getCookie('code');
 
 function setCookie(cvalue) {
-    document.cookie = "code="+cvalue+"; expires=Wed, 05 Aug 2025 23:00:00 UTC; path=/;";
-    document.cookie = "lastMonth="+todayDate.getMonth()+"; expires=Wed, 05 Aug 2025 23:00:00 UTC; path=/";
+    document.cookie = "code=" + cvalue + "; expires=Wed, 05 Aug 2025 23:00:00 UTC; path=/;";
+    document.cookie = "lastMonth=" + todayDate.getMonth() + "; expires=Wed, 05 Aug 2025 23:00:00 UTC; path=/";
 }
-
 
 var myContainer = document.getElementById("myContainer");
 
-
-function toggleCheckbox(element)
- {   
+function toggleCheckbox(element) {
     scanBoxes();
- }
+}
 
- function checkboxMarkup(state,day) {
+function checkboxMarkup(state, day) {
     if (state == "on") {
-        return `
+        return (
+            `
             <label class="check-on" tabindex="0">
             <input type="checkbox" onchange="toggleCheckbox(this)" id="day1" name="settings" checked onclick="return false">
-            <div class="siteofgrace"><span class="calendar-day">`+day+`</span></div>
+            <div class="siteofgrace"><span class="calendar-day">` +
+            day +
+            `</span></div>
             </label>
             `
-    }
-    else if (state =="off") {
-        return `
+        );
+    } else if (state == "off") {
+        return (
+            `
             <label class="check-off" tabindex="0">
             <input type="checkbox" onchange="toggleCheckbox(this)" id="day1" name="settings" onclick="return false">
-            <div class="siteofgrace"><span class="calendar-day">`+day+`</span></div>
+            <div class="siteofgrace"><span class="calendar-day">` +
+            day +
+            `</span></div>
             </label>
             `
+        );
     }
 
     // Day is today
     else {
-        return `
+        return (
+            `
         <label class="check-off" tabindex="0">
         <input type="checkbox" id="today-check" onchange="toggleCheckbox(this)" id="day1" name="settings">
-        <div id="today-day" class="siteofgrace"></div><span class="today-number">`+day+`</span>
+        <div id="today-day" class="siteofgrace"></div><span class="today-number">` +
+            day +
+            `</span>
         </label>
         `
+        );
     }
 }
 
-
-
-function scanBoxes(){
-    var allCheckboxes = myContainer.getElementsByTagName("input")
+function scanBoxes() {
+    var allCheckboxes = myContainer.getElementsByTagName("input");
     var dayBinary = "";
     for (i = 0; i < allCheckboxes.length; i++) {
         if (allCheckboxes[i].checked == true) {
             dayBinary += "1";
-        }
-        else {
+        } else {
             dayBinary += "0";
         }
     }
@@ -171,7 +152,7 @@ function scanBoxes(){
 
 // Select all checkboxes with the name 'settings' using querySelectorAll.
 var checkboxes = document.querySelectorAll("input[type=checkbox][name=settings]");
-let enabledSettings = []
+let enabledSettings = [];
 
 /*
 For IE11 support, replace arrow functions with normal functions and
@@ -180,24 +161,20 @@ https://vanillajstoolkit.com/polyfills/arrayforeach/
 */
 
 // Use Array.forEach to add an event listener to each checkbox.
-checkboxes.forEach(function(checkbox) {
-  checkbox.addEventListener('change', function() {
-    enabledSettings = 
-      Array.from(checkboxes) // Convert checkboxes to an array to use filter and map.
-      .filter(i => i.checked) // Use Array.filter to remove unchecked checkboxes.
-      .map(i => i.value) // Use Array.map to extract only the checkbox values from the array of objects.
-      
-    console.log(enabledSettings)
-  })
-});
+checkboxes.forEach(function (checkbox) {
+    checkbox.addEventListener("change", function () {
+        enabledSettings = Array.from(checkboxes) // Convert checkboxes to an array to use filter and map.
+            .filter((i) => i.checked) // Use Array.filter to remove unchecked checkboxes.
+            .map((i) => i.value); // Use Array.map to extract only the checkbox values from the array of objects.
 
+        console.log(enabledSettings);
+    });
+});
 
 function play() {
     var audio = document.getElementById("audio");
     audio.play();
-  }
-
-  
+}
 
 const audio = document.getElementById("audio");
 const playPauseButton = document.getElementById("play-pause-button");
@@ -235,9 +212,6 @@ playPauseButton.addEventListener("click", () => {
     isPlaying = !isPlaying;
 });
 
-
-
-
 volumeToggle.addEventListener("click", () => {
     if (isVolumeControl) {
         // volumeControl.classList.remove("block");
@@ -252,7 +226,7 @@ volumeToggle.addEventListener("click", () => {
         audio.volume = 0;
         isVolumeControl = true;
     }
-})
+});
 
 volumeControl.addEventListener("input", () => {
     audio.volume = volumeControl.value;
@@ -271,7 +245,7 @@ audio.addEventListener("timeupdate", () => {
         graceSound.play();
     }
 
-    currentTimeDisplay.textContent = `${currentMinutes}:${currentSeconds < 10 ? '0' : ''}${currentSeconds} / `;
+    currentTimeDisplay.textContent = `${currentMinutes}:${currentSeconds < 10 ? "0" : ""}${currentSeconds} / `;
     // totalTimeDisplay.textContent = `${totalMinutes}:${totalSeconds < 10 ? '0' : ''}${totalSeconds}`;
     // totalTimeDisplay.textContent = `${duration}m`;
 
@@ -298,14 +272,11 @@ audio.addEventListener("timeupdate", () => {
             lostGraceMessage.classList.add("invisible");
 
             lostGraceMessage.classList.remove("z-10");
-            lostGraceMessage.classList.add("-z-10");;
-          }, 2000);
+            lostGraceMessage.classList.add("-z-10");
+        }, 2000);
     }
 
-
-
-
-    if ((currentMinutes == totalMinutes) && (currentSeconds == totalSeconds)) {
+    if (currentMinutes == totalMinutes && currentSeconds == totalSeconds) {
         // Fade-in grace message
         audio.pause();
         showGrace();
@@ -323,14 +294,13 @@ audio.addEventListener("timeupdate", () => {
         // Wait 7000 ms...
         setTimeout(() => {
             hideGrace();
-          }, 7000);
+        }, 7000);
     }
-    
 });
 
 function clearTime() {
     progress = 0;
-    progressBar.style.width = '0%';
+    progressBar.style.width = "0%";
     playPauseButton.innerText = "Start";
     audio.currentTime = 0;
     currentMinutes = 0;
@@ -342,28 +312,27 @@ function timerReset() {
     audio.pause();
     setTimeout(() => {
         clearTime();
-      }, 100);
+    }, 100);
 }
 
 timeRightArrow.addEventListener("click", () => {
     if (timePosCurrent < timePosMax) {
         // Bump up to the next level
         timeLeftArrow.style.cursor = "pointer";
-        timePosCurrent ++;
+        timePosCurrent++;
         duration = positionTimes[timePosCurrent];
-        totalTimeDisplay.innerText = duration/60 + " minutes";
+        totalTimeDisplay.innerText = duration / 60 + " minutes";
         audio.pause();
         clearTime();
 
-        if (timePosCurrent == timePosMax) {            
+        if (timePosCurrent == timePosMax) {
             // Set default cursor if at max setting
             timeRightArrow.style.cursor = "default";
-        }   else {
+        } else {
             console.log("unexpected error");
         }
-    }
-        else {
-            console.log("unexpected error");
+    } else {
+        console.log("unexpected error");
     }
 });
 
@@ -371,25 +340,23 @@ timeLeftArrow.addEventListener("click", () => {
     if (timePosCurrent > timePosMin) {
         // Bump up to the next level
         timeRightArrow.style.cursor = "pointer";
-        timePosCurrent --;
+        timePosCurrent--;
         duration = positionTimes[timePosCurrent];
-        totalTimeDisplay.innerText = duration/60 + " minutes";
-        audio.pause();  
+        totalTimeDisplay.innerText = duration / 60 + " minutes";
+        audio.pause();
         clearTime();
 
-        if (timePosCurrent == timePosMin) {            
+        if (timePosCurrent == timePosMin) {
             // Set default cursor if at max setting
             timeLeftArrow.style.cursor = "default";
             totalTimeDisplay.innerText = duration + " seconds";
-        }   else {
+        } else {
             console.log("unexpected error");
         }
-    }
-        else {
-            console.log("unexpected error");
+    } else {
+        console.log("unexpected error");
     }
 });
-
 
 // For location and pulling from cookie
 let locPosCurrent = 0;
@@ -398,22 +365,20 @@ const locationLeft = document.getElementById("location-left");
 const locationRight = document.getElementById("location-right");
 var locationTitle = document.getElementById("location-title");
 
-
-locationLeft.addEventListener("click", () => {
-});
+locationLeft.addEventListener("click", () => {});
 
 locationRight.addEventListener("click", () => {
-    locPosCurrent ++;
+    locPosCurrent++;
     console.log(positionLocations.length);
     console.log(locPosCurrent);
     clearTime();
-    if (locPosCurrent > (positionLocations.length - 1)) {
+    if (locPosCurrent > positionLocations.length - 1) {
         locPosCurrent = 0;
         document.cookie = "lastLocation=" + locPosCurrent;
     } else {
-    switchLocation();
-    audio.load();
-    document.cookie = "lastLocation=" + locPosCurrent;
+        switchLocation();
+        audio.load();
+        document.cookie = "lastLocation=" + locPosCurrent;
     }
     switchLocation();
     audio.load();
@@ -421,7 +386,7 @@ locationRight.addEventListener("click", () => {
 });
 
 locationLeft.addEventListener("click", () => {
-    locPosCurrent --;
+    locPosCurrent--;
     console.log(positionLocations.length);
     console.log(locPosCurrent);
     clearTime();
@@ -429,14 +394,12 @@ locationLeft.addEventListener("click", () => {
         locPosCurrent = positionLocations.length - 1;
         document.cookie = "lastLocation=" + locPosCurrent;
     } else {
-    switchLocation();
-    document.cookie = "lastLocation=" + locPosCurrent;
+        switchLocation();
+        document.cookie = "lastLocation=" + locPosCurrent;
     }
     switchLocation();
     document.cookie = "lastLocation=" + locPosCurrent;
 });
-
-
 
 var audioSource = document.getElementById("audio-source");
 var backgroundScene = document.getElementById("bg");
@@ -484,8 +447,4 @@ function switchLocation() {
         backgroundScene.style.backgroundImage = "url(img/scene-farumazula-1.jpg)";
     }
     audio.load();
-
 }
-
-
-

@@ -13,7 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
     checkCookie();
 
     function checkCookie() {
-        if (!document.cookie) {
+        // Check for "code" cookie
+        if (!document.cookie.match(/^(.*;)?\s*code\s*=\s*[^;]+(.*)?$/)) {
             console.log("no cookie found, zeroing out!");
             document.cookie = "code=" + zeroesForMonth + "; expires=Wed, 05 Aug 2025 23:00:00 UTC; path=/";
             document.cookie = "lastMonth=8; expires=Wed, 05 Aug 2025 23:00:00 UTC; path=/";
@@ -285,7 +286,7 @@ audio.addEventListener("timeupdate", () => {
         const todayCheck = document.getElementById("today-check");
         todayCheck.checked = true;
 
-        if (totalSeconds > 5) {
+        if (totalSeconds > 4) {
             scanBoxes();
         } else {
             // Testing mode, don't cookie

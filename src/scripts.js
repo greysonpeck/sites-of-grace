@@ -189,6 +189,7 @@ const timeLeftArrow = document.getElementById("time-left");
 const timeRightArrow = document.getElementById("time-right");
 
 let isPlaying = false;
+let isDone = false;
 let isVolumeControl = false;
 let duration = 900;
 
@@ -199,10 +200,17 @@ let timePosMax = 3;
 const positionTimes = [5, 600, 900, 1200];
 
 playPauseButton.addEventListener("click", () => {
+    console.log("clicked, is it done?" + isDone);
     if (isPlaying) {
+        isDone = false;
         audio.pause();
         playPauseButton.textContent = "";
         playPauseButton.innerText = "Start";
+    } else if (isDone) {
+        console.log("we think it's done");
+        clearTime();
+        audio.play();
+        playPauseButton.innerText = "Pause";
     } else {
         audio.play();
         playPauseButton.textContent = "";
@@ -279,12 +287,16 @@ audio.addEventListener("timeupdate", () => {
 
     if (currentMinutes == totalMinutes && currentSeconds == totalSeconds) {
         // Fade-in grace message
+        isPlaying = false;
+        isDone = true;
         audio.pause();
+        playPauseButton.innerText = "Restart";
+        console.log(isDone);
         showGrace();
 
         // Check box
         const todayCheck = document.getElementById("today-check");
-        todayCheck.checked = true;
+        // todayCheck.checked = true;
 
         if (totalSeconds > 4) {
             scanBoxes();
@@ -294,8 +306,9 @@ audio.addEventListener("timeupdate", () => {
 
         // Wait 7000 ms...
         setTimeout(() => {
+            console.log("timing out");
             hideGrace();
-        }, 7000);
+        }, 2000);
     }
 });
 

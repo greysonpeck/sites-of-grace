@@ -71,7 +71,7 @@ function getLastDate(name) {
 const todayDate = new Date();
 const todayDay = todayDate.getDate();
 const daysInMonth = (year, month) => new Date(year, month, 0).getDate();
-const daysThisMonth = daysInMonth(todayDate.getFullYear(), todayDate.getMonth());
+const daysThisMonth = daysInMonth(todayDate.getFullYear(), todayDate.getMonth() + 1);
 
 var zeroesForMonth = "";
 for (i = 0; i < daysThisMonth; i++) {
@@ -188,6 +188,13 @@ const lostGraceMessage = document.getElementById("grace-discovered");
 const timeLeftArrow = document.getElementById("time-left");
 const timeRightArrow = document.getElementById("time-right");
 
+const today = new Date();
+const month = today.getMonth();
+const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+monthName = document.getElementById("month-name");
+monthName.innerText = monthNames[month];
+
 let isPlaying = false;
 let isDone = false;
 let isVolumeControl = false;
@@ -296,7 +303,7 @@ audio.addEventListener("timeupdate", () => {
 
         // Check box
         const todayCheck = document.getElementById("today-check");
-        // todayCheck.checked = true;
+        todayCheck.checked = true;
 
         if (totalSeconds > 4) {
             scanBoxes();

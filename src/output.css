@@ -2737,7 +2737,7 @@ label input {
   height: 44px;
 }
 
-#myContainer div {
+#myContainer .siteofgrace {
   position: absolute;
   top: 0;
   left: 0;

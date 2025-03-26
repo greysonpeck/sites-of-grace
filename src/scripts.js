@@ -305,7 +305,8 @@ audio.addEventListener("timeupdate", () => {
         const todayCheck = document.getElementById("today-check");
         todayCheck.checked = true;
 
-        if (totalSeconds > 4) {
+        if (totalSeconds != 5) {
+            console.log("we're in it");
             scanBoxes();
         } else {
             // Testing mode, don't cookie
